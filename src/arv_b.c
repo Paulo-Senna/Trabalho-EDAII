@@ -202,9 +202,11 @@ static void remover_rec(BArvore *bt, BNodo *x, int chave) {
 }
 
 void b_remover(BArvore *bt, int chave) {
-    if (!bt->raiz || bt->raiz->n == 0) return;
+    if (!bt->raiz) return;
+    if (bt->raiz->n == 0 && bt->raiz->folha) return;   /* arvore vazia */
     remover_rec(bt, bt->raiz, chave);
-    if (bt->raiz->n == 0 && !bt->raiz->folha) {
+    /* colapsa raizes vazias ate ter uma com chaves ou ser folha */
+    while (bt->raiz->n == 0 && !bt->raiz->folha) {
         BNodo *antigo = bt->raiz;
         bt->raiz      = antigo->filhos[0];
         bn_liberar(antigo);

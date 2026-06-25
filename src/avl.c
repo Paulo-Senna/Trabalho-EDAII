@@ -79,7 +79,7 @@ nodoAVL *insereAVL(int info, nodoAVL *arv) {
 /* ----- remocao ----- */
 
 nodoAVL *menorNodo(nodoAVL *raiz) {
-    while (raiz->esq != NULL) raiz = raiz->esq;
+    while (raiz->esq != NULL) { contador_ops++; raiz = raiz->esq; }
     return raiz;
 }
 
